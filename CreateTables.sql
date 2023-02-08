@@ -1,13 +1,13 @@
 DROP TABLE IF EXISTS `register`;
 DROP TABLE IF EXISTS `major`;
+DROP TABLE IF EXISTS `minor`;
 DROP TABLE IF EXISTS `students`;
 DROP TABLE IF EXISTS `courses`;
 DROP TABLE IF EXISTS `degrees`;
 DROP TABLE IF EXISTS `departments`;
-DROP TABLE IF EXISTS `minor`;
 
 CREATE TABLE students(
-	snum int UNIQUE NOT NULL ,
+	snum int UNIQUE NOT NULL,
     ssn int UNIQUE NOT NULL,
     name varchar(10),
     gender varchar(1),
@@ -24,7 +24,7 @@ CREATE TABLE departments(
     name varchar(50) UNIQUE NOT NULL,
     phone varchar(10),
     college varchar(20),
-    primary key (code, name)
+    primary key (code)
 );
 
 CREATE TABLE degrees(
@@ -32,17 +32,17 @@ CREATE TABLE degrees(
     level varchar(5),
     department_code int,
     primary key (name, level),
-    constraint department_code foreign key (department_code) references departments (code)
+    foreign key (department_code) references departments (code)
 );
 
 CREATE TABLE courses(
 	number int,
-    name varchar(50),
+    name varchar(50) UNIQUE NOT NULL,
     description varchar(50), 
     credithours int,
     level varchar(20),
     department_code int,
-    primary key(number, name),
+    primary key(number),
     foreign key (department_code) references departments (code)
 );
 
